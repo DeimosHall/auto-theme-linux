@@ -15,4 +15,8 @@ class Theme:
     def get(self):
         command = 'gsettings list-recursively org.gnome.desktop.interface | grep "gtk-theme"'
         result = os.popen(command).read()
-        return result.split()[2]
+        result = result.split()[2]  # The third position contains the name of the theme
+        result = result.strip("'")  # Removes the ' from the start and the end
+        return result
+
+theme = Theme()
